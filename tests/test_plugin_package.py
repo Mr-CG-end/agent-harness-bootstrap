@@ -42,7 +42,7 @@ class PluginPackageTests(unittest.TestCase):
             self.assertNotIn(field, self.manifest)
 
     def test_readmes_document_installer_and_skill_path(self) -> None:
-        for filename in ('README.md', 'README.zh-CN.md'):
+        for filename in ('README.md', 'README.en.md'):
             content = (ROOT / filename).read_text(encoding='utf-8')
             self.assertIn('$skill-installer', content)
             self.assertIn(
