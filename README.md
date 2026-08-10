@@ -18,11 +18,12 @@ The default workflow is read-only first. It audits the target repository, propos
 
 ## Status
 
-Version `0.1` is an early, usable foundation. It currently provides:
+Version `0.1.0` is an early, usable foundation. It currently provides:
 
 - a dependency-free, read-only repository auditor;
 - a preview-first, non-overwriting `AGENTS.md` generator;
 - a portable `bootstrap-project-harness` Skill;
+- a Codex Plugin manifest for package-based distribution;
 - guidance for JavaScript/TypeScript, Python, Rust, Go, JVM, .NET, Ruby, and PHP repositories;
 - tests and cross-platform CI for the packaged tooling.
 
@@ -56,11 +57,22 @@ python skills/bootstrap-project-harness/scripts/generate_harness.py /path/to/rep
 
 The generator never overwrites an existing file. It deliberately avoids inventing formatter, linter, test, build, CI, or hook configuration that the repository cannot support yet.
 
-Install the Skill by copying `skills/bootstrap-project-harness` into your Codex skills directory. Restart or reload Codex so it can discover the Skill, then ask:
+### Install the Skill
+
+In Codex, ask the built-in installer to install the Skill directly from GitHub:
+
+```text
+Use $skill-installer to install the bootstrap-project-harness skill from:
+https://github.com/Mr-CG-end/agent-harness-bootstrap/tree/main/skills/bootstrap-project-harness
+```
+
+To pin the installation to this release, replace `main` with `v0.1.0` in the URL. You can also manually copy `skills/bootstrap-project-harness` into your Codex skills directory. Restart or reload Codex after a manual installation, then ask:
 
 ```text
 Use $bootstrap-project-harness to establish a minimal engineering harness for this repository.
 ```
+
+The repository also contains a `.codex-plugin/plugin.json` manifest, so the Skill can be distributed as a Codex Plugin. Until it is listed in a public plugin directory, installing the standalone Skill from GitHub is the most direct public installation path.
 
 ## Development
 
@@ -70,7 +82,7 @@ The repository has no third-party runtime dependencies. Python 3.10 or newer is 
 python scripts/verify.py
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution rules and [docs/v0.1-plan.md](docs/v0.1-plan.md) for the initial product boundary.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution rules, [CHANGELOG.md](CHANGELOG.md) for release history, and [docs/v0.1-plan.md](docs/v0.1-plan.md) for the initial product boundary.
 
 ## Design principles
 

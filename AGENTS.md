@@ -7,8 +7,9 @@ This repository maintains a portable Skill and dependency-free audit tooling for
 ## Structure
 
 - `skills/bootstrap-project-harness/` is the distributable Skill. Keep it self-contained and free of repository-level README, changelog, or contribution files.
+- `.codex-plugin/plugin.json` packages the repository as a Codex Plugin and points to the distributable Skill.
 - `scripts/verify.py` is the single local verification entry point.
-- `tests/` contains deterministic tests for the packaged audit script and Skill structure.
+- `tests/` contains deterministic tests for the packaged audit script, Skill, and Plugin structure.
 - `docs/v0.1-plan.md` records the current product boundary and acceptance criteria.
 
 ## Commands
