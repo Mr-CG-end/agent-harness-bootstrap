@@ -18,11 +18,12 @@
 
 ## 当前状态
 
-`0.1` 版本是一套可用的早期基础，目前提供：
+`0.1.0` 版本是一套可用的早期基础，目前提供：
 
 - 零依赖、只读的仓库审计器；
 - 默认预览、不会覆盖文件的 `AGENTS.md` 生成器；
 - 可移植的 `bootstrap-project-harness` Skill；
+- 用于按包分发的 Codex Plugin 清单；
 - 面向 JavaScript/TypeScript、Python、Rust、Go、JVM、.NET、Ruby 和 PHP 项目的选择指南；
 - 覆盖打包工具的测试和跨平台 CI。
 
@@ -56,11 +57,22 @@ python skills/bootstrap-project-harness/scripts/generate_harness.py /path/to/rep
 
 生成器绝不会覆盖已有文件，也不会凭空编造项目尚不具备的格式化、Lint、测试、构建、CI 或 Hooks 配置。
 
-如需安装 Skill，把 `skills/bootstrap-project-harness` 复制到 Codex Skills 目录，然后重启或重新加载 Codex，并输入：
+### 安装 Skill
+
+在 Codex 中让内置安装器直接从 GitHub 安装：
+
+```text
+使用 $skill-installer 从以下地址安装 bootstrap-project-harness Skill：
+https://github.com/Mr-CG-end/agent-harness-bootstrap/tree/main/skills/bootstrap-project-harness
+```
+
+如果希望锁定到当前版本，请把 URL 中的 `main` 替换为 `v0.1.0`。也可以手动把 `skills/bootstrap-project-harness` 复制到 Codex Skills 目录；手动安装后需重启或重新加载 Codex，再输入：
 
 ```text
 使用 $bootstrap-project-harness 为这个仓库建立最小工程 Harness。
 ```
+
+仓库同时提供 `.codex-plugin/plugin.json`，可作为 Codex Plugin 分发。在进入公开插件目录前，直接从 GitHub 安装独立 Skill 是最直接的社区安装方式。
 
 ## 参与开发
 
@@ -70,7 +82,7 @@ python skills/bootstrap-project-harness/scripts/generate_harness.py /path/to/rep
 python scripts/verify.py
 ```
 
-贡献规则见 [CONTRIBUTING.md](CONTRIBUTING.md)，首版产品边界见 [docs/v0.1-plan.md](docs/v0.1-plan.md)。
+贡献规则见 [CONTRIBUTING.md](CONTRIBUTING.md)，版本记录见 [CHANGELOG.md](CHANGELOG.md)，首版产品边界见 [docs/v0.1-plan.md](docs/v0.1-plan.md)。
 
 ## 设计原则
 

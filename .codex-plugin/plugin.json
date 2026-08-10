@@ -1,0 +1,33 @@
+{
+  "name": "agent-harness-bootstrap",
+  "version": "0.1.0",
+  "description": "Bootstrap portable, executable engineering harnesses for AI-assisted repositories.",
+  "author": {
+    "name": "Mr-CG-end",
+    "url": "https://github.com/Mr-CG-end"
+  },
+  "homepage": "https://github.com/Mr-CG-end/agent-harness-bootstrap",
+  "repository": "https://github.com/Mr-CG-end/agent-harness-bootstrap",
+  "license": "Apache-2.0",
+  "keywords": [
+    "codex",
+    "agent-skills",
+    "agents-md",
+    "engineering-harness",
+    "ci"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Agent Harness Bootstrap",
+    "shortDescription": "Bootstrap executable repository guardrails.",
+    "longDescription": "Audit repositories and establish minimal instructions, verification, CI, and approval boundaries.",
+    "developerName": "Mr-CG-end",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/Mr-CG-end/agent-harness-bootstrap",
+    "defaultPrompt": "Bootstrap a minimal engineering harness for this repository."
+  }
+}
