@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bootstrap Project Harness"
+  short_description: "Bootstrap executable AI project guardrails"
+  default_prompt: "Use $bootstrap-project-harness to establish a minimal, executable engineering harness for this repository."
