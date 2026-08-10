@@ -36,7 +36,7 @@ class SkillPackageTests(unittest.TestCase):
     def test_skill_package_contains_no_repository_documentation(self) -> None:
         forbidden = {
             "README.md",
-            "README.zh-CN.md",
+            "README.en.md",
             "CONTRIBUTING.md",
             "CHANGELOG.md",
             "SECURITY.md",
@@ -51,10 +51,10 @@ class SkillPackageTests(unittest.TestCase):
         self.assertIn("$bootstrap-project-harness", metadata)
 
     def test_readmes_link_to_each_other(self) -> None:
-        english = (ROOT / "README.md").read_text(encoding="utf-8")
-        chinese = (ROOT / "README.zh-CN.md").read_text(encoding="utf-8")
-        self.assertIn("README.zh-CN.md", english)
-        self.assertIn("README.md", chinese)
+        english = (ROOT / "README.en.md").read_text(encoding="utf-8")
+        chinese = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn("README.md", english)
+        self.assertIn("README.en.md", chinese)
 
 
 if __name__ == "__main__":

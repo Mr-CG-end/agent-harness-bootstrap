@@ -1,100 +1,100 @@
 # Agent Harness Bootstrap
 
-[简体中文](README.zh-CN.md) | English
+简体中文 | [English](README.en.md)
 
-Bootstrap a small, executable engineering harness for greenfield and existing repositories.
+为新项目或已有项目建立小而可执行的工程 Harness（工程护栏）。
 
-The project packages repository-audit tooling and an installable Codex Skill that turns project conventions into a layered contract:
+本项目包含仓库审计工具和一个可安装的 Codex Skill，用分层方式把项目约定转化为工程契约：
 
-1. concise repository instructions;
-2. versioned sources of truth;
-3. deterministic format, lint, type, test, build, and artifact checks;
-4. one local verification entry point;
-5. CI using the same verification path;
-6. optional local hooks;
-7. explicit human approval and acceptance boundaries.
+1. 简洁的仓库协作说明；
+2. 纳入版本控制的事实来源；
+3. 确定性的格式、Lint、类型、测试、构建和产物检查；
+4. 单一的本地验证入口；
+5. 复用同一验证入口的 CI；
+6. 可选的本地 Hooks；
+7. 明确的人工授权与验收边界。
 
-The default workflow is read-only first. It audits the target repository, proposes the smallest useful harness, and only changes files after the user has authorized implementation.
+默认工作流从只读审计开始：先了解目标仓库，给出最小且适用的 Harness 方案，只有在用户授权实施后才修改文件。
 
-## Status
+## 当前状态
 
-Version `0.1.0` is an early, usable foundation. It currently provides:
+`0.1.0` 版本是一套可用的早期基础，目前提供：
 
-- a dependency-free, read-only repository auditor;
-- a preview-first, non-overwriting `AGENTS.md` generator;
-- a portable `bootstrap-project-harness` Skill;
-- a Codex Plugin manifest for package-based distribution;
-- guidance for JavaScript/TypeScript, Python, Rust, Go, JVM, .NET, Ruby, and PHP repositories;
-- tests and cross-platform CI for the packaged tooling.
+- 零依赖、只读的仓库审计器；
+- 默认预览、不会覆盖文件的 `AGENTS.md` 生成器；
+- 可移植的 `bootstrap-project-harness` Skill；
+- 用于按包分发的 Codex Plugin 清单；
+- 面向 JavaScript/TypeScript、Python、Rust、Go、JVM、.NET、Ruby 和 PHP 项目的选择指南；
+- 覆盖打包工具的测试和跨平台 CI。
 
-It does not automatically create remote repositories, change branch protection, install hooks, manage secrets, deploy software, commit, or push.
+它不会自动创建远端仓库、修改分支保护、安装 Hooks、管理密钥、部署、提交或推送。
 
-## Quick start
+## 快速开始
 
-Audit a repository without modifying it:
+只读审计目标仓库：
 
 ```shell
 python skills/bootstrap-project-harness/scripts/audit_repo.py /path/to/repository
 ```
 
-Emit machine-readable output:
+输出适合程序处理的 JSON：
 
 ```shell
 python skills/bootstrap-project-harness/scripts/audit_repo.py /path/to/repository --json
 ```
 
-Preview a minimal repository contract without changing files:
+只预览最小仓库契约，不修改文件：
 
 ```shell
 python skills/bootstrap-project-harness/scripts/generate_harness.py /path/to/repository
 ```
 
-Create a missing `AGENTS.md` after reviewing the plan:
+确认方案后创建缺失的 `AGENTS.md`：
 
 ```shell
 python skills/bootstrap-project-harness/scripts/generate_harness.py /path/to/repository --apply
 ```
 
-The generator never overwrites an existing file. It deliberately avoids inventing formatter, linter, test, build, CI, or hook configuration that the repository cannot support yet.
+生成器绝不会覆盖已有文件，也不会凭空编造项目尚不具备的格式化、Lint、测试、构建、CI 或 Hooks 配置。
 
-### Install the Skill
+### 安装 Skill
 
-In Codex, ask the built-in installer to install the Skill directly from GitHub:
+在 Codex 中让内置安装器直接从 GitHub 安装：
 
 ```text
-Use $skill-installer to install the bootstrap-project-harness skill from:
+使用 $skill-installer 从以下地址安装 bootstrap-project-harness Skill：
 https://github.com/Mr-CG-end/agent-harness-bootstrap/tree/main/skills/bootstrap-project-harness
 ```
 
-To pin the installation to this release, replace `main` with `v0.1.0` in the URL. You can also manually copy `skills/bootstrap-project-harness` into your Codex skills directory. Restart or reload Codex after a manual installation, then ask:
+如果希望锁定到当前版本，请把 URL 中的 `main` 替换为 `v0.1.0`。也可以手动把 `skills/bootstrap-project-harness` 复制到 Codex Skills 目录；手动安装后需重启或重新加载 Codex，再输入：
 
 ```text
-Use $bootstrap-project-harness to establish a minimal engineering harness for this repository.
+使用 $bootstrap-project-harness 为这个仓库建立最小工程 Harness。
 ```
 
-The repository also contains a `.codex-plugin/plugin.json` manifest, so the Skill can be distributed as a Codex Plugin. Until it is listed in a public plugin directory, installing the standalone Skill from GitHub is the most direct public installation path.
+仓库同时提供 `.codex-plugin/plugin.json`，可作为 Codex Plugin 分发。在进入公开插件目录前，直接从 GitHub 安装独立 Skill 是最直接的社区安装方式。
 
-## Development
+## 参与开发
 
-The repository has no third-party runtime dependencies. Python 3.10 or newer is required.
+仓库没有第三方运行时依赖，需要 Python 3.10 或更高版本。
 
 ```shell
 python scripts/verify.py
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution rules, [CHANGELOG.md](CHANGELOG.md) for release history, and [docs/v0.1-plan.md](docs/v0.1-plan.md) for the initial product boundary.
+贡献规则见 [CONTRIBUTING.md](CONTRIBUTING.md)，版本记录见 [CHANGELOG.md](CHANGELOG.md)，首版产品边界见 [docs/v0.1-plan.md](docs/v0.1-plan.md)。
 
-## Design principles
+## 设计原则
 
-- Inspect before changing.
-- Reuse native project tooling.
-- Prefer executable checks over prose.
-- Keep one canonical repository contract.
-- Keep CI and local verification aligned.
-- Treat hooks as feedback, not enforcement.
-- Keep permissions and remote operations human-controlled.
-- Preview generation by default and never overwrite existing project contracts.
+- 修改前先检查。
+- 复用项目原生工具链。
+- 优先用可执行检查表达约束。
+- 维护一份规范的仓库契约。
+- 本地验证和 CI 使用同一入口。
+- Hooks 用于缩短反馈，不作为强制边界。
+- 权限和远端操作由人控制。
+- 默认只预览生成结果，不覆盖已有项目契约。
 
-## License
+## 许可证
 
-Licensed under the Apache License 2.0. See [LICENSE](LICENSE).
+使用 Apache License 2.0，详见 [LICENSE](LICENSE)。
