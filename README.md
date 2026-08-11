@@ -4,7 +4,7 @@
 
 为新项目或已有项目建立小而可执行的工程 Harness（工程护栏）。
 
-本项目包含仓库审计工具和一个可安装的 Codex Skill，用分层方式把项目约定转化为工程契约：
+本项目包含仓库审计工具和一个可安装的 Skill，用分层方式把项目约定转化为工程契约：
 
 1. 简洁的仓库协作说明；
 2. 纳入版本控制的事实来源；
@@ -23,7 +23,7 @@
 - 零依赖、只读的仓库审计器；
 - 默认预览、不会覆盖文件的 `AGENTS.md` 生成器；
 - 可移植的 `bootstrap-project-harness` Skill；
-- 用于按包分发的 Codex Plugin 清单；
+- 面向 Codex 与 Claude Code 的分发清单；
 - 面向 JavaScript/TypeScript、Python、Rust、Go、JVM、.NET、Ruby 和 PHP 项目的选择指南；
 - 覆盖打包工具的测试和跨平台 CI。
 
@@ -59,20 +59,35 @@ python skills/bootstrap-project-harness/scripts/generate_harness.py /path/to/rep
 
 ### 安装 Skill
 
-在 Codex 中让内置安装器直接从 GitHub 安装：
+Skill 本身与具体工具无关，可用于 Codex、Claude Code，或任何读取 `SKILL.md` 的编码代理。
+
+**Codex** —— 让内置安装器直接从 GitHub 安装：
 
 ```text
 使用 $skill-installer 从以下地址安装 bootstrap-project-harness Skill：
 https://github.com/Mr-CG-end/agent-harness-bootstrap/tree/main/skills/bootstrap-project-harness
 ```
 
-如果希望锁定到当前版本，请把 URL 中的 `main` 替换为 `v0.1.0`。也可以手动把 `skills/bootstrap-project-harness` 复制到 Codex Skills 目录；手动安装后需重启或重新加载 Codex，再输入：
+如果希望锁定到当前版本，请把 URL 中的 `main` 替换为 `v0.1.0`。安装后输入 `$bootstrap-project-harness` 调用。
+
+**Claude Code** —— 添加插件市场并安装：
 
 ```text
-使用 $bootstrap-project-harness 为这个仓库建立最小工程 Harness。
+/plugin marketplace add Mr-CG-end/agent-harness-bootstrap
+/plugin install agent-harness-bootstrap@agent-harness
 ```
 
-仓库同时提供 `.codex-plugin/plugin.json`，可作为 Codex Plugin 分发。在进入公开插件目录前，直接从 GitHub 安装独立 Skill 是最直接的社区安装方式。
+安装后的完整命令为 `/agent-harness-bootstrap:bootstrap-project-harness`；未与其他命令重名时，直接输入 `/bootstrap-project-harness` 也可调用。
+
+**手动安装** —— 把 `skills/bootstrap-project-harness` 整个目录复制到代理的 Skills 目录（Claude Code 为 `~/.claude/skills/`），然后重启或重新加载代理。
+
+调用后可以这样描述需求：
+
+```text
+为这个仓库建立最小工程 Harness。
+```
+
+仓库同时提供 `.codex-plugin/plugin.json` 与 `.claude-plugin/marketplace.json` 两份分发清单，位于各自目录，互不影响。
 
 ## 参与开发
 
