@@ -1,0 +1,16 @@
+{
+  "name": "agent-harness",
+  "owner": {
+    "name": "Mr-CG-end",
+    "url": "https://github.com/Mr-CG-end"
+  },
+  "plugins": [
+    {
+      "name": "agent-harness-bootstrap",
+      "source": "./",
+      "strict": false,
+      "description": "Bootstrap a minimal, executable engineering harness for a repository.",
+      "skills": ["./skills/bootstrap-project-harness"]
+    }
+  ]
+}

@@ -4,7 +4,7 @@
 
 Bootstrap a small, executable engineering harness for greenfield and existing repositories.
 
-The project packages repository-audit tooling and an installable Codex Skill that turns project conventions into a layered contract:
+The project packages repository-audit tooling and an installable Skill that turns project conventions into a layered contract:
 
 1. concise repository instructions;
 2. versioned sources of truth;
@@ -23,7 +23,7 @@ Version `0.1.0` is an early, usable foundation. It currently provides:
 - a dependency-free, read-only repository auditor;
 - a preview-first, non-overwriting `AGENTS.md` generator;
 - a portable `bootstrap-project-harness` Skill;
-- a Codex Plugin manifest for package-based distribution;
+- distribution manifests for Codex and Claude Code;
 - guidance for JavaScript/TypeScript, Python, Rust, Go, JVM, .NET, Ruby, and PHP repositories;
 - tests and cross-platform CI for the packaged tooling.
 
@@ -59,20 +59,35 @@ The generator never overwrites an existing file. It deliberately avoids inventin
 
 ### Install the Skill
 
-In Codex, ask the built-in installer to install the Skill directly from GitHub:
+The Skill is tool-agnostic. It works in Codex, Claude Code, or any coding agent that reads `SKILL.md`.
+
+**Codex** — ask the built-in installer to install directly from GitHub:
 
 ```text
 Use $skill-installer to install the bootstrap-project-harness skill from:
 https://github.com/Mr-CG-end/agent-harness-bootstrap/tree/main/skills/bootstrap-project-harness
 ```
 
-To pin the installation to this release, replace `main` with `v0.1.0` in the URL. You can also manually copy `skills/bootstrap-project-harness` into your Codex skills directory. Restart or reload Codex after a manual installation, then ask:
+To pin the installation to this release, replace `main` with `v0.1.0` in the URL. Invoke it with `$bootstrap-project-harness`.
+
+**Claude Code** — add the marketplace and install:
 
 ```text
-Use $bootstrap-project-harness to establish a minimal engineering harness for this repository.
+/plugin marketplace add Mr-CG-end/agent-harness-bootstrap
+/plugin install agent-harness-bootstrap@agent-harness
 ```
 
-The repository also contains a `.codex-plugin/plugin.json` manifest, so the Skill can be distributed as a Codex Plugin. Until it is listed in a public plugin directory, installing the standalone Skill from GitHub is the most direct public installation path.
+The full command is `/agent-harness-bootstrap:bootstrap-project-harness`. The bare `/bootstrap-project-harness` also works unless another command already uses that name.
+
+**Manual** — copy the `skills/bootstrap-project-harness` directory into your agent's skills directory (`~/.claude/skills/` for Claude Code), then restart or reload the agent.
+
+Once installed, describe what you need:
+
+```text
+Establish a minimal engineering harness for this repository.
+```
+
+The repository ships both `.codex-plugin/plugin.json` and `.claude-plugin/marketplace.json`. They live in separate directories and do not interfere with each other.
 
 ## Development
 
